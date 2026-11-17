@@ -1,0 +1,6 @@
+#!/Users/glodon/Documents/Codex/2026-11-16/ni-h-2/work/pdf-to-word/.venv/bin/python
+import sys
+from fontTools.ttx import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())

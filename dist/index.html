@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#17140f">
+  <meta name="description" content="一款简洁、耐玩的网页版五子棋，支持人机对战与双人对战。">
+  <title>弈五子 · Gomoku</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="弈五子首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><b></b></span>
+        <span><strong>弈五子</strong><small>GOMOKU</small></span>
+      </a>
+      <div class="header-actions">
+        <button class="icon-button" id="soundButton" aria-label="切换声音" title="声音">♪</button>
+        <button class="icon-button" id="themeButton" aria-label="切换主题" title="切换主题">☾</button>
+      </div>
+    </header>
+
+    <section class="game-layout">
+      <aside class="panel settings-panel">
+        <div class="eyebrow">对局设置</div>
+        <h1>下一手，<br><em>落在哪里？</em></h1>
+        <p class="intro">连成五子即可取胜。棋局会自动保存在这台设备上。</p>
+
+        <fieldset>
+          <legend>游戏模式</legend>
+          <div class="segmented" id="modeSelector">
+            <button data-mode="ai" class="active">人机对战</button>
+            <button data-mode="pvp">双人对战</button>
+          </div>
+        </fieldset>
+
+        <fieldset id="difficultyField">
+          <legend>AI 难度</legend>
+          <div class="segmented three" id="difficultySelector">
+            <button data-level="easy">悠闲</button>
+            <button data-level="normal" class="active">认真</button>
+            <button data-level="hard">高手</button>
+          </div>
+        </fieldset>
+
+        <fieldset id="colorField">
+          <legend>执子选择</legend>
+          <div class="color-options" id="colorSelector">
+            <button data-color="black" class="active"><span class="mini-stone black"></span>执黑先行</button>
+            <button data-color="white"><span class="mini-stone white"></span>执白后行</button>
+          </div>
+        </fieldset>
+
+        <div class="main-actions">
+          <button class="primary-button" id="newGameButton">开始新对局 <span>↗</span></button>
+          <button class="text-button" id="resetScoreButton">清空战绩</button>
+        </div>
+      </aside>
+
+      <section class="board-area" aria-label="五子棋棋盘区域">
+        <div class="status-row">
+          <div class="turn-indicator">
+            <span class="status-stone black" id="turnStone"></span>
+            <div><small>当前回合</small><strong id="turnText">黑方落子</strong></div>
+          </div>
+          <div class="move-count"><small>手数</small><strong id="moveCount">00</strong></div>
+        </div>
+
+        <div class="board-frame" id="boardFrame">
+          <canvas id="board" width="760" height="760" aria-label="15乘15五子棋棋盘" role="application"></canvas>
+          <div class="game-result" id="gameResult" hidden>
+            <span class="result-stone" id="resultStone"></span>
+            <small>本局结束</small>
+            <h2 id="resultTitle">黑方胜</h2>
+            <p id="resultMessage">漂亮的五子连珠</p>
+            <button id="playAgainButton">再来一局</button>
+          </div>
+        </div>
+
+        <div class="board-toolbar">
+          <button id="undoButton"><span>↶</span> 悔棋</button>
+          <span class="hint" id="hintText">点击交叉点落子</span>
+          <button id="restartButton"><span>↻</span> 重新开始</button>
+        </div>
+      </section>
+
+      <aside class="panel score-panel">
+        <div class="eyebrow">本地战绩</div>
+        <div class="score-card black-card">
+          <div><span class="score-stone black"></span><p><small>BLACK</small><strong>黑方</strong></p></div>
+          <b id="blackWins">0</b>
+        </div>
+        <div class="score-card white-card">
+          <div><span class="score-stone white"></span><p><small>WHITE</small><strong>白方</strong></p></div>
+          <b id="whiteWins">0</b>
+        </div>
+        <div class="score-card draw-card">
+          <div><span class="draw-icon">＝</span><p><small>DRAW</small><strong>和棋</strong></p></div>
+          <b id="draws">0</b>
+        </div>
+        <div class="rule-note">
+          <span>✦</span>
+          <p><strong>胜负规则</strong>横、竖或斜线率先连成五子的一方获胜。</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
